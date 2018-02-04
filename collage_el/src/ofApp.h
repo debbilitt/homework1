@@ -26,4 +26,7 @@ class ofApp : public ofBaseApp{
 		int size[50];
 		int sourceX[50];
 		int sourceY[50];
+		int dist[50];
+		int centX;
+		int centY;
 };
