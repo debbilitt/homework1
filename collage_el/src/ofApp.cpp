@@ -12,7 +12,7 @@ void ofApp::setup() {
 		size[i] = ofRandom(100.0f, 500.0f);
 		sourceX[i] = ofRandom(0.0f, (mCat.getWidth()/1.5));
 		sourceY[i] = ofRandom(0.0f, (mCat.getHeight() / 1.5));
-		dist[i] = ofDist(centX, centY, sourceX[i], sourceY[i]);
+		dist[i] = ((sourceX[i]-centX) + (sourceY[i] - centY));
 	}
 }
 
@@ -29,12 +29,13 @@ void ofApp::draw() {
 	//draw cat picture
 	mCat.draw(0, 0);
 	
+	int mouseDist = ((ofGetMouseX() - centX) + (ofGetMouseY() - centY));
 
 	for (int i = 0; i < 50; i++) {
 		ofPushMatrix();
-		ofRotateY(dist[i]);
+		ofRotateY(dist[i]+mouseDist);
 		ofSetColor(255, 255, 255, (100+offset[i]));
-		mCat.drawSubsection(sourceX[i] + ofGetMouseY(), sourceY[i] + ofGetMouseY(), size[i], size[i], sourceX[i] + ofGetMouseX(), sourceY[i] + ofGetMouseY());
+		mCat.drawSubsection(offset[i] + sourceX[i] + mouseDist, offset[i] + sourceY[i] + mouseDist, size[i], size[i], sourceX[i]+mouseDist, sourceY[i]+mouseDist);
 		ofPopMatrix();
 	}
 
