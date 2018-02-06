@@ -30,10 +30,11 @@ void ofApp::draw() {
 	mCat.draw(0, 0);
 	
 	int mouseDist = ((ofGetMouseX() - centX) + (ofGetMouseY() - centY));
-
+	float time = ofGetElapsedTimef();
 	for (int i = 0; i < 50; i++) {
 		ofPushMatrix();
-		ofRotateY(dist[i]+mouseDist);
+		ofRotateX(fmod(time, 50));
+		ofRotateY(mouseDist+dist[i]);
 		ofSetColor(255, 255, 255, (100+offset[i]));
 		mCat.drawSubsection(offset[i] + sourceX[i] + mouseDist, offset[i] + sourceY[i] + mouseDist, size[i], size[i], sourceX[i]+mouseDist, sourceY[i]+mouseDist);
 		ofPopMatrix();
