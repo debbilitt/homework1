@@ -22,11 +22,11 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 		
 		ofImage mCat;
-		int offset[50];
-		int size[50];
-		int sourceX[50];
-		int sourceY[50];
-		int dist[50];
+		int offset[80];
+		int size[80];
+		int sourceX[80];
+		int sourceY[80];
+		int dist[80];
 		int centX;
 		int centY;
 };

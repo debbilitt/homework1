@@ -7,7 +7,8 @@ void ofApp::setup() {
 	centX = mCat.getWidth() / 2;
 	centY = mCat.getHeight() / 2;
 
-	for (int i = 0; i < 50; i++) {
+	//instantiate random arrays
+	for (int i = 0; i < 80; i++) {
 		offset[i] = ofRandom(-30.0f, 30.0f);
 		size[i] = ofRandom(100.0f, 500.0f);
 		sourceX[i] = ofRandom(0.0f, (mCat.getWidth()/1.5));
@@ -29,17 +30,20 @@ void ofApp::draw() {
 	//draw cat picture
 	mCat.draw(0, 0);
 	
+	//calculate distance between mouse and center of image
 	int mouseDist = ((ofGetMouseX() - centX) + (ofGetMouseY() - centY));
 	float time = ofGetElapsedTimef();
-	for (int i = 0; i < 50; i++) {
+	//draw all subsections
+	for (int i = 0; i < 80; i++) {
 		ofPushMatrix();
-		ofRotateX(fmod(time, 50));
+		//rotate on x-axis based on time and offset
+		ofRotateX(fmod(time, 50) + offset[i]);
+		//rotate on y-axis based on mouse distance from center
 		ofRotateY(mouseDist+dist[i]);
 		ofSetColor(255, 255, 255, (100+offset[i]));
 		mCat.drawSubsection(offset[i] + sourceX[i] + mouseDist, offset[i] + sourceY[i] + mouseDist, size[i], size[i], sourceX[i]+mouseDist, sourceY[i]+mouseDist);
 		ofPopMatrix();
 	}
-
 }
 
 //--------------------------------------------------------------
